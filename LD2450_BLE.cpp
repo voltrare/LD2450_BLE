@@ -14,14 +14,14 @@ std::map<std::string, int> LD2450_BLE::scanResults;
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) override {
         if (advertisedDevice.haveName()) {
-            std::string deviceName = advertisedDevice.getName();
+            std::string deviceName = std::string(advertisedDevice.getName().c_str());
             if (deviceName.find("HLK-LD2450") != std::string::npos) {
                 Serial.print("Found Device: ");
                 Serial.print(advertisedDevice.getAddress().toString().c_str());
                 Serial.print(", RSSI: ");
                 Serial.println(advertisedDevice.getRSSI());
 
-                LD2450_BLE::addScanResult(advertisedDevice.getAddress().toString(), advertisedDevice.getRSSI());
+                LD2450_BLE::addScanResult(std::string(advertisedDevice.getAddress().toString().c_str()), advertisedDevice.getRSSI());
             }
         }
     }
