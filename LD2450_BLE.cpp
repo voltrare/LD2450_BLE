@@ -29,7 +29,6 @@ class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
 
 void LD2450_BLE::init(const char* address) {
     sensorAddress = BLEAddress(address);
-    BLEDevice::init("");
 }
 
 bool LD2450_BLE::isConnected() {
@@ -142,7 +141,6 @@ Target LD2450_BLE::transformTarget(const Target& originalTarget) {
 }
 
 void LD2450_BLE::findLD2450() {
-    BLEDevice::init(""); // Stelle sicher, dass dies aufgerufen wird
     BLEScan* pBLEScan = BLEDevice::getScan();
     pBLEScan->setAdvertisedDeviceCallbacks(new MyAdvertisedDeviceCallbacks());
     pBLEScan->setActiveScan(true); // Aktiver Scan
